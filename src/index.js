@@ -48,9 +48,22 @@ client.on("qr", (qr) => {
   qrcode.generate(qr, { small: true });
 });
 
-client.on("ready", () => {
-  console.log("✅ Bot siap jalan!");
+client.on("authenticated", () => {
+  console.log("🔑 Client berhasil terautentikasi (pakai session dari DB)");
 });
+
+client.on("auth_failure", (msg) => {
+  console.error("❌ Gagal autentikasi:", msg);
+});
+
+client.on("ready", () => {
+  console.log("✅ Bot siap jalan! WhatsApp sudah connect.");
+});
+
+client.on("disconnected", (reason) => {
+  console.log("⚠️ Client terputus:", reason);
+});
+
 
 client.on("message", (msg) => {
   const from = msg.from;
