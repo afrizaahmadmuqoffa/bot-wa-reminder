@@ -29,7 +29,7 @@ const client = new Client({
   authStrategy: new RemoteAuth({
     store,
     backupSyncIntervalMs: 300000,
-    session: "default-session",
+    session: "RemoteAuth",
   }),
 });
 
