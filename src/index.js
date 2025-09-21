@@ -33,8 +33,16 @@ const client = new Client({
   }),
 });
 
-const [rows] = await pool.query("SELECT * FROM wsp_sessions");
-console.log("Sessions in DB:", rows);
+async function checkSession() {
+  try {
+    const [rows] = await pool.query("SELECT * FROM wsp_sessions");
+    console.log("📦 Sessions in DB:", rows);
+  } catch (err) {
+    console.error("❌ Gagal ambil session:", err);
+  }
+}
+
+checkSession();
 
 client.on("qr", (qr) => {
   qrcode.generate(qr, { small: true });
