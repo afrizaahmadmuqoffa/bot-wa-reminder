@@ -33,6 +33,9 @@ const client = new Client({
   }),
 });
 
+const [rows] = await pool.query("SELECT * FROM wsp_sessions");
+console.log("Sessions in DB:", rows);
+
 client.on("qr", (qr) => {
   qrcode.generate(qr, { small: true });
 });
